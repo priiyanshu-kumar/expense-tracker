@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-page">
+        <header class="auth-bar">
+            <a class="logo" href="index.html"><span class="logo-badge">💰</span> Expense Tracker</a>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="login.html">User Login</a>
+                <a href="signup.html">Signup</a>
+            </nav>
+        </header>
+
+        <main class="auth-main" style="grid-template-columns:1fr 1fr">
+            <div class="auth-hero">
+                <h1>Admin <span>Console</span></h1>
+                <p>Manage registered users, monitor all transactions and review overall income and expense statistics across the platform.</p>
+                <div class="auth-points">
+                    <div class="auth-point"><span class="icon">👥</span><span><strong>User management</strong><br><span class="small muted">View all registered users and their details</span></span></div>
+                    <div class="auth-point"><span class="icon">📈</span><span><strong>Platform statistics</strong><br><span class="small muted">Aggregated income, expense and balances</span></span></div>
+                    <div class="auth-point"><span class="icon">🏷️</span><span><strong>Category management</strong><br><span class="small muted">Maintain the default expense categories</span></span></div>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="card-head">
+                    <h2>Admin Login</h2>
+                    <p>Restricted area — administrators only.</p>
+                </div>
+
+                <div id="alert-box" class="alert hidden">
+                    <span class="icon">ℹ</span><span></span>
+                </div>
+
+                <form id="admin-login-form" class="form-grid" novalidate>
+                    <div class="field-group">
+                        <label for="username">Admin Username *</label>
+                        <input type="text" id="username" placeholder="admin" autocomplete="username">
+                        <span class="err" id="username-err" data-error></span>
+                    </div>
+                    <div class="field-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+                        <span class="err" id="password-err" data-error></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login as Admin</button>
+                </form>
+
+                <div class="alert alert-warning" style="font-size:12.5px">
+                    <span class="icon">⚠</span>
+                    <span>Default admin credentials: <strong>admin</strong> / <strong>admin123</strong></span>
+                </div>
+
+                <p class="muted small" style="text-align:center">
+                    Not an admin? <a href="login.html">User Login</a>
+                </p>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>Expense Tracker &copy; 2026 • Admin Module</p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        UI.onReady(function () {
+            Auth.guardVisitPages();
+            document.getElementById("admin-login-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                Auth.handleAdminLogin();
+            });
+        });
+    </script>
+</body>
+</html>

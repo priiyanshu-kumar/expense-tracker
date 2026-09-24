@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-page">
+        <header class="auth-bar">
+            <a class="logo" href="index.html"><span class="logo-badge">💰</span> Expense Tracker</a>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+                <a href="admin-login.html">Admin Login</a>
+            </nav>
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-hero">
+                <h1>Create your free <span>account</span></h1>
+                <p>Start tracking expenses, setting budgets and building healthy financial habits today. Your data lives privately in your own browser.</p>
+                <div class="auth-points">
+                    <div class="auth-point"><span class="icon">🔐</span><span><strong>Private by design</strong><br><span class="small muted">Everything stays in Local Storage on your device</span></span></div>
+                    <div class="auth-point"><span class="icon">⚡</span><span><strong>Instant setup</strong><br><span class="small muted">No installation, no server — just open the browser</span></span></div>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="card-head">
+                    <h2>Sign Up</h2>
+                    <p>Fill in your details to create an account.</p>
+                </div>
+
+                <div id="alert-box" class="alert hidden">
+                    <span class="icon">ℹ</span><span></span>
+                </div>
+
+                <form id="signup-form" class="form-grid" novalidate>
+                    <div class="field-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" placeholder="e.g. John Carter" autocomplete="name">
+                        <span class="err" id="name-err" data-error></span>
+                    </div>
+                    <div class="field-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                        <span class="err" id="email-err" data-error></span>
+                    </div>
+                    <div class="form-grid two-col">
+                        <div class="field-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" placeholder="+91 98765 43210" autocomplete="tel">
+                            <span class="err" id="phone-err" data-error></span>
+                        </div>
+                        <div class="field-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" placeholder="Min 6 characters" autocomplete="new-password">
+                            <span class="err" id="password-err" data-error></span>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label for="confirm">Confirm Password *</label>
+                        <input type="password" id="confirm" placeholder="Repeat your password" autocomplete="new-password">
+                        <span class="err" id="confirm-err" data-error></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+
+                <p class="muted small" style="text-align:center">
+                    Already have an account? <a href="login.html">Login here</a> &nbsp;•&nbsp;
+                    Are you an admin? <a href="admin-login.html">Admin Login</a>
+                </p>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>Expense Tracker &copy; 2026 • HTML + CSS + Vanilla JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        UI.onReady(function () {
+            Auth.guardVisitPages();
+            document.getElementById("signup-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                Auth.handleSignup();
+            });
+        });
+    </script>
+</body>
+</html>

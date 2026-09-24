@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgets - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+
+        <aside class="dash-sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <span class="logo-badge">💰</span>
+                    <div>
+                        <div class="brand-name">Expense Tracker</div>
+                        <div class="brand-sub">User Module</div>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-title">Menu</div>
+                    <a href="user-dashboard.html"><span class="icon">📊</span> Dashboard</a>
+                    <a href="transactions.html"><span class="icon">💸</span> Transactions</a>
+                    <a href="budget.html"><span class="icon">🎯</span> Budgets</a>
+                    <a href="accounts.html"><span class="icon">🏦</span> Accounts</a>
+                    <a href="reports.html"><span class="icon">📈</span> Reports</a>
+                    <div class="nav-title">General</div>
+                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                </nav>
+            </div>
+            <div class="sidebar-user">
+                <span class="avatar" id="sb-avatar">?</span>
+                <div>
+                    <div class="uname" id="sb-name">—</div>
+                    <div class="uemail" id="sb-email">—</div>
+                </div>
+                <a href="#" data-logout title="Logout">🚪</a>
+            </div>
+        </aside>
+
+        <div class="dash-main">
+            <div class="mobile-nav">
+                <a href="user-dashboard.html">Dashboard</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="budget.html">Budgets</a>
+                <a href="accounts.html">Accounts</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" data-logout>Logout</a>
+            </div>
+
+            <div class="topbar">
+                <h1 id="page-title">Budgets</h1>
+                <div class="topbar-actions">
+                    <a href="transactions.html" class="btn btn-outline btn-sm">+ Add Expenses</a>
+                    <a href="user-dashboard.html" class="btn btn-outline btn-sm">← Dashboard</a>
+                </div>
+            </div>
+
+            <main class="page-content">
+                <!-- Month selector -->
+                <div class="panel" style="margin-bottom:24px">
+                    <div class="panel-head">
+                        <h3>Budget Month</h3>
+                        <input type="month" id="bud-month" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px">
+                    </div>
+                </div>
+
+                <!-- Budget summary - CSS Grid -->
+                <section class="tx-summary-strip">
+                    <div class="s-box"><div class="s-label">Total Budgeted</div><div class="s-value" id="bud-total-budget">$0.00</div></div>
+                    <div class="s-box"><div class="s-label">Total Spent</div><div class="s-value text-danger" id="bud-total-spent">$0.00</div></div>
+                    <div class="s-box"><div class="s-label">Remaining</div><div class="s-value" id="bud-total-remaining">$0.00</div></div>
+                    <div class="s-box"><div class="s-label">Status</div><div class="s-value" id="bud-count">0 budgets</div></div>
+                </section>
+
+                <div id="bud-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+
+                <div class="section-grid" style="grid-template-columns: 300px 1fr">
+                    <div class="panel">
+                        <div class="panel-head"><h3>Set a Budget</h3></div>
+                        <form id="add-budget-form" class="form-grid">
+                            <div class="field-group">
+                                <label>Category *</label>
+                                <select id="budget-category"></select>
+                            </div>
+                            <div class="field-group">
+                                <label>Monthly Limit ($) *</label>
+                                <input type="number" id="bud-amount" min="1" step="1" placeholder="e.g. 500">
+                            </div>
+                            <div class="alert alert-info" style="font-size:12.5px">
+                                <span class="icon">ℹ</span>
+                                <span>Setting the same category again will update its budget for the selected month.</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Save Budget</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <div class="table-wrap">
+                            <div class="grid-table">
+                                <div class="grid-row header budget-cols">
+                                    <span class="cell">Category</span>
+                                    <span class="cell">Budget</span>
+                                    <span class="cell">Spent</span>
+                                    <span class="cell">Remaining</span>
+                                    <span class="cell">Usage</span>
+                                    <span class="cell">Status</span>
+                                </div>
+                                <div id="budget-table-body"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/transactions.js"></script>
+    <script>
+        UI.onReady(function () {
+            Transactions.initBudgetPage();
+        });
+    </script>
+</body>
+</html>

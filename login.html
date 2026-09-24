@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-page">
+        <header class="auth-bar">
+            <a class="logo" href="index.html"><span class="logo-badge">💰</span> Expense Tracker</a>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="signup.html">Signup</a>
+                <a href="admin-login.html">Admin Login</a>
+            </nav>
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-hero">
+                <h1>Welcome <span>back!</span></h1>
+                <p>Sign in to your dashboard to view your transactions, budgets, accounts and reports.</p>
+                <div class="auth-points">
+                    <div class="auth-point"><span class="icon">📊</span><span><strong>Your dashboard</strong><br><span class="small muted">All your financial data in one place</span></span></div>
+                    <div class="auth-point"><span class="icon">🔒</span><span><strong>Secure session</strong><br><span class="small muted">Your login session is saved locally</span></span></div>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="card-head">
+                    <h2>User Login</h2>
+                    <p>Enter your registered email and password.</p>
+                </div>
+
+                <div id="alert-box" class="alert hidden">
+                    <span class="icon">ℹ</span><span></span>
+                </div>
+
+                <form id="login-form" class="form-grid" novalidate>
+                    <div class="field-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                        <span class="err" id="email-err" data-error></span>
+                    </div>
+                    <div class="field-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" placeholder="Your password" autocomplete="current-password">
+                        <span class="err" id="password-err" data-error></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+                <p class="muted small" style="text-align:center">
+                    New user? <a href="signup.html">Create an account</a>
+                </p>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>Expense Tracker &copy; 2026 • HTML + CSS + Vanilla JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        UI.onReady(function () {
+            Auth.guardVisitPages();
+            document.getElementById("login-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                Auth.handleUserLogin();
+            });
+        });
+    </script>
+</body>
+</html>

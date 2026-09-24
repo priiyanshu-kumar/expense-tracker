@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+
+        <aside class="dash-sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <span class="logo-badge">🛡️</span>
+                    <div>
+                        <div class="brand-name">Expense Tracker</div>
+                        <div class="brand-sub">Admin Module</div>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-title">Admin Menu</div>
+                    <a href="admin-dashboard.html"><span class="icon">📊</span> Overview</a>
+                    <a href="admin-dashboard.html#users"><span class="icon">👥</span> Users</a>
+                    <a href="admin-dashboard.html#transactions"><span class="icon">🧾</span> Transactions</a>
+                    <a href="admin-dashboard.html#categories"><span class="icon">🏷️</span> Categories</a>
+                    <div class="nav-title">General</div>
+                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                </nav>
+            </div>
+            <div class="sidebar-user">
+                <span class="avatar" id="sb-avatar">A</span>
+                <div>
+                    <div class="uname" id="sb-name">Administrator</div>
+                    <div class="uemail" id="sb-email">admin</div>
+                </div>
+                <a href="#" data-logout title="Logout">🚪</a>
+            </div>
+        </aside>
+
+        <div class="dash-main">
+            <div class="mobile-nav">
+                <a href="admin-dashboard.html">Overview</a>
+                <a href="#users">Users</a>
+                <a href="#transactions">Transactions</a>
+                <a href="#categories">Categories</a>
+                <a href="#" data-logout>Logout</a>
+            </div>
+
+            <div class="topbar">
+                <h1 id="page-title">Admin Dashboard</h1>
+                <div class="topbar-actions">
+                    <a href="index.html" class="btn btn-outline btn-sm">View Site</a>
+                    <button class="btn btn-danger btn-sm" data-logout>Logout</button>
+                </div>
+            </div>
+
+            <main class="page-content">
+                <h2 id="admin-greeting" class="mb-2" style="font-size:20px">Admin Console</h2>
+
+                <!-- Stats - CSS Grid -->
+                <section class="cards-grid">
+                    <div class="stat-card">
+                        <span class="stat-icon bg-blue">👥</span>
+                        <div>
+                            <div class="stat-label">Registered Users</div>
+                            <div class="stat-value" id="st-users">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-green">⬆</span>
+                        <div>
+                            <div class="stat-label">Total Income (all users)</div>
+                            <div class="stat-value" id="st-income">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-red">⬇</span>
+                        <div>
+                            <div class="stat-label">Total Expense (all users)</div>
+                            <div class="stat-value" id="st-expense">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-teal">⚖️</span>
+                        <div>
+                            <div class="stat-label">Net Balance</div>
+                            <div class="stat-value" id="st-balance">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-amber">🧾</span>
+                        <div>
+                            <div class="stat-label">Total Transactions</div>
+                            <div class="stat-value" id="st-txcount">0</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Platform chart -->
+                <section class="chart-grid">
+                    <div class="chart-box">
+                        <h3>Platform Income vs Expense <span class="small muted">(last 6 months, all users)</span></h3>
+                        <canvas id="admin-chart-monthly"></canvas>
+                    </div>
+                </section>
+
+                <!-- Users -->
+                <section id="users" class="mb-3">
+                    <div class="panel-head" style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
+                        <h3 style="font-size:16px">👥 Registered Users</h3>
+                        <a href="#top" class="btn btn-sm btn-outline">Back to top</a>
+                    </div>
+                    <div class="table-wrap">
+                        <div class="grid-table">
+                            <div class="grid-row header users-cols">
+                                <span class="cell">Name</span>
+                                <span class="cell">Email</span>
+                                <span class="cell">Phone</span>
+                                <span class="cell">Joined</span>
+                                <span class="cell">Actions</span>
+                            </div>
+                            <div id="admin-users-body"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- All transactions -->
+                <section id="transactions" class="mb-3">
+                    <div class="panel-head" style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
+                        <h3 style="font-size:16px">🧾 All Transactions</h3>
+                        <div style="display:grid;grid-auto-flow:column;gap:10px;align-items:center">
+                            <span class="small muted">Scope:</span>
+                            <select id="admin-scope" style="padding:8px 11px;border:1.5px solid var(--border);border-radius:8px">
+                                <option value="all">All</option>
+                                <option value="expense">Expenses only</option>
+                                <option value="income">Income only</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <div class="grid-table">
+                            <div class="grid-row header admin-tx-cols">
+                                <span class="cell">User</span>
+                                <span class="cell">Type</span>
+                                <span class="cell">Date</span>
+                                <span class="cell">Category / Account</span>
+                                <span class="cell">Description</span>
+                                <span class="cell">Amount</span>
+                            </div>
+                            <div id="admin-tx-body"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Category management -->
+                <section id="categories">
+                    <div class="section-grid" style="grid-template-columns: 320px 1fr">
+                        <div class="panel">
+                            <div class="panel-head"><h3>Add Default Category</h3></div>
+                            <form id="cat-add-form" class="form-grid">
+                                <div class="field-group">
+                                    <label>Name *</label>
+                                    <input type="text" id="cat-name" placeholder="e.g. Pets">
+                                </div>
+                                <div class="field-group">
+                                    <label>Type</label>
+                                    <select id="cat-type">
+                                        <option value="expense">Expense</option>
+                                        <option value="income">Income</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">+ Add Category</button>
+                            </form>
+                            <div class="alert alert-info" style="font-size:12.5px">
+                                <span class="icon">ℹ</span>
+                                <span>Default categories are applied to new signups. Existing users keep their own copies.</span>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-head"><h3>Default Categories</h3></div>
+                            <div id="cat-list"></div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- View user modal -->
+    <div id="view-modal-overlay" class="modal-overlay hidden">
+        <div class="modal" style="max-width:620px">
+            <div class="modal-head">
+                <h3>User Details</h3>
+                <button class="close-btn" id="view-close" type="button">✕</button>
+            </div>
+            <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Name</div><div id="view-name" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Email</div><div id="view-email" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Phone</div><div id="view-phone" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Joined</div><div id="view-joined" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Income</div><div id="view-income" class="text-success" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Expense</div><div id="view-expense" class="text-danger" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Balance</div><div id="view-balance" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Transactions</div><div id="view-tx-count" style="font-weight:700">—</div>
+                </div>
+                <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
+                    <div class="small muted s-label">Spent this month</div><div id="view-month-spent" style="font-weight:700">—</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="mb-1" style="font-size:14px">Recent Activity</h4>
+                <div id="view-recent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

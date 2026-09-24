@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+
+        <aside class="dash-sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <span class="logo-badge">💰</span>
+                    <div>
+                        <div class="brand-name">Expense Tracker</div>
+                        <div class="brand-sub">User Module</div>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-title">Menu</div>
+                    <a href="user-dashboard.html"><span class="icon">📊</span> Dashboard</a>
+                    <a href="transactions.html"><span class="icon">💸</span> Transactions</a>
+                    <a href="budget.html"><span class="icon">🎯</span> Budgets</a>
+                    <a href="accounts.html"><span class="icon">🏦</span> Accounts</a>
+                    <a href="reports.html"><span class="icon">📈</span> Reports</a>
+                    <div class="nav-title">General</div>
+                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                </nav>
+            </div>
+            <div class="sidebar-user">
+                <span class="avatar" id="sb-avatar">?</span>
+                <div>
+                    <div class="uname" id="sb-name">—</div>
+                    <div class="uemail" id="sb-email">—</div>
+                </div>
+                <a href="#" data-logout title="Logout">🚪</a>
+            </div>
+        </aside>
+
+        <div class="dash-main">
+            <div class="mobile-nav">
+                <a href="user-dashboard.html">Dashboard</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="budget.html">Budgets</a>
+                <a href="accounts.html">Accounts</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" data-logout>Logout</a>
+            </div>
+
+            <div class="topbar">
+                <h1 id="page-title">Reports &amp; Analytics</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" id="rep-export">⬇ Export Report</button>
+                    <label class="small muted" for="report-month" style="align-self:center">Month:
+                        <input type="month" id="report-month" style="padding:8px 11px;border:1.5px solid var(--border);border-radius:8px;margin-left:6px">
+                    </label>
+                </div>
+            </div>
+
+            <main class="page-content">
+                <section class="cards-grid">
+                    <div class="stat-card">
+                        <span class="stat-icon bg-green">⬆</span>
+                        <div>
+                            <div class="stat-label">Income (selected month)</div>
+                            <div class="stat-value" id="rep-income">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-red">⬇</span>
+                        <div>
+                            <div class="stat-label">Expense (selected month)</div>
+                            <div class="stat-value" id="rep-expense">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-teal">⚖️</span>
+                        <div>
+                            <div class="stat-label">Net (selected month)</div>
+                            <div class="stat-value" id="rep-balance">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-blue">📊</span>
+                        <div>
+                            <div class="stat-label">All-Time Income</div>
+                            <div class="stat-value" id="rep-all-income">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon bg-amber">💸</span>
+                        <div>
+                            <div class="stat-label">All-Time Expense</div>
+                            <div class="stat-value" id="rep-all-expense">$0.00</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts - CSS Grid -->
+                <section class="chart-grid">
+                    <div class="chart-box">
+                        <h3>Income vs Expense <span class="small muted">(last 6 months)</span></h3>
+                        <canvas id="rep-chart-bar"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Expense by Category <span class="small muted">(selected month)</span></h3>
+                        <canvas id="rep-chart-doughnut"></canvas>
+                        <div class="legend" id="rep-legend"></div>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Balance Trend <span class="small muted">(cumulative, last 6 months)</span></h3>
+                        <canvas id="rep-chart-line"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Monthly Summary <span class="small muted">(all recorded months)</span></h3>
+                        <div class="table-wrap" style="border:none;box-shadow:none">
+                            <div class="grid-table">
+                                <div class="grid-row header" style="grid-template-columns:1fr 1fr 1fr 1fr">
+                                    <span class="cell">Month</span>
+                                    <span class="cell">Income</span>
+                                    <span class="cell">Expense</span>
+                                    <span class="cell">Balance</span>
+                                </div>
+                                <div id="rep-monthly-body"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/transactions.js"></script>
+    <script>
+        UI.onReady(function () {
+            var m = "" + new Date().getFullYear() + "-" + String(new Date().getMonth() + 1).padStart(2, "0");
+            document.getElementById("report-month").value = m;
+            Reports.init();
+        });
+    </script>
+</body>
+</html>

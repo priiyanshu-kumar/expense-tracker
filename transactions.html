@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Expense Tracker</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+
+        <aside class="dash-sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <span class="logo-badge">💰</span>
+                    <div>
+                        <div class="brand-name">Expense Tracker</div>
+                        <div class="brand-sub">User Module</div>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-title">Menu</div>
+                    <a href="user-dashboard.html"><span class="icon">📊</span> Dashboard</a>
+                    <a href="transactions.html"><span class="icon">💸</span> Transactions</a>
+                    <a href="budget.html"><span class="icon">🎯</span> Budgets</a>
+                    <a href="accounts.html"><span class="icon">🏦</span> Accounts</a>
+                    <a href="reports.html"><span class="icon">📈</span> Reports</a>
+                    <div class="nav-title">General</div>
+                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                </nav>
+            </div>
+            <div class="sidebar-user">
+                <span class="avatar" id="sb-avatar">?</span>
+                <div>
+                    <div class="uname" id="sb-name">—</div>
+                    <div class="uemail" id="sb-email">—</div>
+                </div>
+                <a href="#" data-logout title="Logout">🚪</a>
+            </div>
+        </aside>
+
+        <div class="dash-main">
+            <div class="mobile-nav">
+                <a href="user-dashboard.html">Dashboard</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="budget.html">Budgets</a>
+                <a href="accounts.html">Accounts</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" data-logout>Logout</a>
+            </div>
+
+            <div class="topbar">
+                <h1 id="page-title">Transactions</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary btn-sm" id="btn-export">⬇ Export CSV</button>
+                    <a href="user-dashboard.html" class="btn btn-outline btn-sm">← Dashboard</a>
+                </div>
+            </div>
+
+            <main class="page-content">
+                <!-- Summary strip - CSS Grid -->
+                <section class="tx-summary-strip">
+                    <div class="s-box"><div class="s-label">Total Income</div><div class="s-value text-success" id="sum-income">$0.00</div></div>
+                    <div class="s-box"><div class="s-label">Total Expense</div><div class="s-value text-danger" id="sum-expense">$0.00</div></div>
+                    <div class="s-box"><div class="s-label">Balance</div><div class="s-value" id="sum-balance">$0.00</div></div>
+                    <div class="s-box"><div class="s-label">Records</div><div class="s-value" id="sum-count">0</div></div>
+                </section>
+
+                <div id="tx-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="expense">💸 Expenses</button>
+                    <button class="tab-btn" data-tab="income">⬆ Income</button>
+                    <button class="tab-btn" data-tab="recurring">🔁 Recurring</button>
+                </div>
+
+                <!-- Shared filters - one instance, applies to both tables -->
+                <div class="table-toolbar" style="margin-bottom:18px">
+                    <h3 style="font-size:15px">Transaction History</h3>
+                    <div class="filters">
+                        <input type="search" id="filter-search" placeholder="Search…" style="padding:8px 11px;border:1.5px solid var(--border);border-radius:8px;width:190px">
+                        <select id="filter-category" style="padding:8px 11px;border:1.5px solid var(--border);border-radius:8px">
+                            <option value="all">All categories</option>
+                        </select>
+                        <input type="month" id="filter-month" style="padding:8px 11px;border:1.5px solid var(--border);border-radius:8px">
+                    </div>
+                </div>
+
+                <!-- EXPENSE PANEL -->
+                <section id="panel-expense" class="tab-panel active">
+                    <div class="section-grid" style="grid-template-columns: 320px 1fr">
+                        <div class="panel">
+                            <div class="panel-head"><h3>Add Expense</h3></div>
+                            <form id="add-expense-form" class="form-grid">
+                                <div class="field-group">
+                                    <label>Category *</label>
+                                    <select id="exp-category"></select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Amount ($) *</label>
+                                    <input type="number" id="exp-amount" min="0.01" step="0.01" placeholder="0.00">
+                                </div>
+                                <div class="field-group">
+                                    <label>Date *</label>
+                                    <input type="date" id="exp-date">
+                                </div>
+                                <div class="field-group">
+                                    <label>Account *</label>
+                                    <select id="exp-account"></select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Description</label>
+                                    <textarea id="exp-description" rows="2" placeholder="e.g. Weekly groceries"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">+ Add Expense</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <div class="table-wrap">
+                                <div class="grid-table">
+                                    <div class="grid-row header tx-cols">
+                                        <span class="cell">Date</span>
+                                        <span class="cell">Category</span>
+                                        <span class="cell">Account</span>
+                                        <span class="cell">Description</span>
+                                        <span class="cell">Amount</span>
+                                        <span class="cell">Actions</span>
+                                    </div>
+                                    <div id="tx-table-body-expense"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INCOME PANEL -->
+                <section id="panel-income" class="tab-panel">
+                    <div class="section-grid" style="grid-template-columns: 320px 1fr">
+                        <div class="panel">
+                            <div class="panel-head"><h3>Add Income</h3></div>
+                            <form id="add-income-form" class="form-grid">
+                                <div class="field-group">
+                                    <label>Category *</label>
+                                    <select id="inc-category"></select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Amount ($) *</label>
+                                    <input type="number" id="inc-amount" min="0.01" step="0.01" placeholder="0.00">
+                                </div>
+                                <div class="field-group">
+                                    <label>Date *</label>
+                                    <input type="date" id="inc-date">
+                                </div>
+                                <div class="field-group">
+                                    <label>Account *</label>
+                                    <select id="inc-account"></select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Description</label>
+                                    <textarea id="inc-description" rows="2" placeholder="e.g. Monthly salary"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block">+ Add Income</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <div class="table-wrap">
+                                <div class="grid-table">
+                                    <div class="grid-row header tx-cols">
+                                        <span class="cell">Date</span>
+                                        <span class="cell">Category</span>
+                                        <span class="cell">Account</span>
+                                        <span class="cell">Description</span>
+                                        <span class="cell">Amount</span>
+                                        <span class="cell">Actions</span>
+                                    </div>
+                                    <div id="tx-table-body-income"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RECURRING PANEL -->
+                <section id="panel-recurring" class="tab-panel">
+                    <div class="section-grid" style="grid-template-columns: 320px 1fr">
+                        <div class="panel">
+                            <div class="panel-head"><h3>Add Recurring Expense</h3></div>
+                            <div id="rec-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+                            <form id="add-recurring-form" class="form-grid">
+                                <div class="field-group">
+                                    <label>Name *</label>
+                                    <input type="text" id="rec-name" placeholder="e.g. Netflix subscription">
+                                </div>
+                                <div class="field-group">
+                                    <label>Amount ($) *</label>
+                                    <input type="number" id="rec-amount" min="0.01" step="0.01" placeholder="0.00">
+                                </div>
+                                <div class="field-group">
+                                    <label>Category</label>
+                                    <select id="rec-category"></select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Account</label>
+                                    <select id="rec-account"></select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Frequency</label>
+                                    <select id="rec-frequency">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly" selected>Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Next Due Date *</label>
+                                    <input type="date" id="rec-nextdate">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">+ Add Recurring</button>
+                            </form>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-head"><h3>Upcoming Recurring Expenses</h3></div>
+                            <div class="reminder-list" id="recurring-list"></div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit transaction modal -->
+    <div id="edit-modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-head">
+                <h3 id="edit-title">Edit Transaction</h3>
+                <button class="close-btn" id="edit-modal-close" type="button">✕</button>
+            </div>
+            <form id="edit-form" class="form-grid">
+                <div class="field-group">
+                    <label>Amount ($) *</label>
+                    <input type="number" id="edit-amount" min="0.01" step="0.01">
+                </div>
+                <div class="field-group">
+                    <label>Date *</label>
+                    <input type="date" id="edit-date">
+                </div>
+                <div class="field-group">
+                    <label>Category</label>
+                    <select id="edit-category"></select>
+                </div>
+                <div class="field-group">
+                    <label>Account</label>
+                    <select id="edit-account"></select>
+                </div>
+                <div class="field-group">
+                    <label>Description</label>
+                    <textarea id="edit-description" rows="2"></textarea>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <button type="button" class="btn btn-secondary" id="edit-modal-close2">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/transactions.js"></script>
+    <script>
+        UI.onReady(function () {
+            Transactions.initTransactionsPage();
+            document.getElementById("edit-modal-close2").addEventListener("click", function () {
+                document.getElementById("edit-modal-overlay").classList.add("hidden");
+            });
+        });
+    </script>
+</body>
+</html>

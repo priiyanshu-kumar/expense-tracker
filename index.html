@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Smart Personal Finance</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="site-grid">
+        <header class="site-header">
+            <div class="logo">
+                <span class="logo-badge">💰</span>
+                <span>Expense Tracker</span>
+            </div>
+            <nav class="site-nav">
+                <a href="index.html" class="active">Home</a>
+                <a href="login.html">User Login</a>
+                <a href="admin-login.html">Admin Login</a>
+                <a href="signup.html">Signup</a>
+            </nav>
+        </header>
+
+        <main class="site-main">
+            <section class="auth-main" style="min-height:60vh">
+                <div class="auth-hero">
+                    <h1>Take control of your <span>money</span>, one expense at a time.</h1>
+                    <p>A complete expense tracker to categorize spending, set budgets, track multiple accounts and understand your finances through charts and reports.</p>
+                    <div class="auth-points" style="grid-template-columns:1fr 1fr">
+                        <div class="auth-point"><span class="icon">🧾</span><span><strong>Track</strong><br><span class="small muted">Expenses &amp; income</span></span></div>
+                        <div class="auth-point"><span class="icon">🎯</span><span><strong>Budget</strong><br><span class="small muted">Per category &amp; month</span></span></div>
+                        <div class="auth-point"><span class="icon">🏦</span><span><strong>Accounts</strong><br><span class="small muted">Multi-account tracking</span></span></div>
+                        <div class="auth-point"><span class="icon">📈</span><span><strong>Reports</strong><br><span class="small muted">Charts &amp; export</span></span></div>
+                    </div>
+                    <div style="display:grid;grid-auto-flow:column;justify-content:start;gap:12px;margin-top:24px">
+                        <a href="signup.html" class="btn btn-primary">Create Account</a>
+                        <a href="login.html" class="btn btn-outline">User Login</a>
+                    </div>
+                </div>
+
+                <div class="auth-card" style="align-content:start">
+                    <div class="card-head">
+                        <h2>Welcome 👋</h2>
+                        <p>A complete finance management system with two modules:</p>
+                    </div>
+                    <div class="feature-list">
+                        <a class="feature-item" href="login.html">
+                            <span class="f-icon">👤</span>
+                            <span><span class="f-title">User Module</span><br><span class="f-desc">Expenses, incomes, budgets, accounts, recurring reminders, reports</span></span>
+                            <span>→</span>
+                        </a>
+                        <a class="feature-item" href="admin-login.html">
+                            <span class="f-icon">🛡️</span>
+                            <span><span class="f-title">Admin Module</span><br><span class="f-desc">Manage users, monitor transactions, view overall statistics</span></span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                    <div class="alert alert-info">
+                        <span class="icon">ℹ</span>
+                        <span>Sign up as a new user to get your own private dashboard. All data is stored securely in your browser's Local Storage.</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                        <a href="signup.html" class="btn btn-primary btn-block">Sign Up</a>
+                        <a href="login.html" class="btn btn-secondary btn-block">Login</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>Expense Tracker &copy; 2026 &nbsp;•&nbsp; HTML + CSS + Vanilla JavaScript &nbsp;•&nbsp; Data stored in Local Storage</p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // If already logged in, greet the right dashboard
+        (function () {
+            var s = Storage.getSession();
+            if (s) {
+                if (s.role === "admin") window.location.href = "admin-dashboard.html";
+                else if (s.role === "user") window.location.href = "user-dashboard.html";
+            }
+        })();
+    </script>
+</body>
+</html>
