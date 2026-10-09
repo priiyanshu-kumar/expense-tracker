@@ -63,7 +63,7 @@ Build a working, client-side only Expense Tracker that lets users record and man
 - ✅ Charts drawn on `<canvas>` with pure JavaScript
 - ✅ CSV export of transactions and monthly reports
 - ✅ Fully responsive (CSS Grid + media queries)
-- ✅ Personalized user and admin dashboard colors with saved themes (teal, red, blue, dark blue, green, light green, violet, orange, pink, rose, amber)
+- ✅ Saved color themes across the home, login, signup and user/admin dashboards (teal, red, blue, dark blue, green, light green, violet, orange, pink, rose, amber)
 - ✅ One user's data never appears for another user (per-user Local Storage keys)
 
 ## 📁 Folder Structure

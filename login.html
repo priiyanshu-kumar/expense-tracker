@@ -16,6 +16,23 @@
                 <a href="index.html">Home</a>
                 <a href="signup.html">Signup</a>
                 <a href="admin-login.html">Admin Login</a>
+                <label class="theme-picker" for="public-theme">
+                    <i data-lucide="palette"></i>
+                    <span>Color</span>
+                    <select id="public-theme" aria-label="Choose site color">
+                        <option value="teal">Teal</option>
+                        <option value="red">Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="navy">Dark blue</option>
+                        <option value="green">Green</option>
+                        <option value="mint">Light green</option>
+                        <option value="violet">Violet</option>
+                        <option value="orange">Orange</option>
+                        <option value="pink">Pink</option>
+                        <option value="rose">Rose</option>
+                        <option value="amber">Amber</option>
+                    </select>
+                </label>
             </nav>
         </header>
 
@@ -66,6 +83,7 @@
 
     <script src="js/storage.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>UI.initPublicTheme();</script>
     <script src="js/auth.js"></script>
     <script>
         UI.onReady(function () {

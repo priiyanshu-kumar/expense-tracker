@@ -122,7 +122,10 @@ const UI = (function () {
     if (!session || (session.role !== "user" && session.role !== "admin")) return;
     const storageKey = session.role === "admin" ? "et_theme_admin" : "et_theme_" + session.userId;
     const savedTheme = localStorage.getItem(storageKey);
-    const themeName = Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, savedTheme) ? savedTheme : "teal";
+    const publicTheme = localStorage.getItem("et_public_theme");
+    const themeName = Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, savedTheme)
+      ? savedTheme
+      : Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, publicTheme) ? publicTheme : "teal";
     setDashboardTheme(themeName);
 
     const picker = $("dashboard-theme");
@@ -134,6 +137,21 @@ const UI = (function () {
         setDashboardTheme(picker.value);
       });
     }
+  }
+
+  function initPublicTheme() {
+    const picker = $("public-theme");
+    if (!picker) return;
+
+    const savedTheme = localStorage.getItem("et_public_theme");
+    const themeName = Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, savedTheme) ? savedTheme : "teal";
+    picker.value = themeName;
+    setDashboardTheme(themeName);
+    picker.addEventListener("change", () => {
+      if (!Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, picker.value)) return;
+      localStorage.setItem("et_public_theme", picker.value);
+      setDashboardTheme(picker.value);
+    });
   }
 
   function initShell(session) {
@@ -399,6 +417,7 @@ const UI = (function () {
     expensesByCategory,
     monthlySeries,
     initShell,
+    initPublicTheme,
     drawBarChart,
     drawDoughnut,
     drawLineChart,
