@@ -92,11 +92,56 @@ const UI = (function () {
     "admin-dashboard.html": "Admin Dashboard",
   };
 
+  const DASHBOARD_THEMES = {
+    teal: { primary: "#0f766e", dark: "#115e59", light: "#ccfbf1", accent: "#14b8a6", shadow: "rgba(15, 118, 110, 0.35)" },
+    red: { primary: "#dc2626", dark: "#b91c1c", light: "#fee2e2", accent: "#f87171", shadow: "rgba(220, 38, 38, 0.32)" },
+    blue: { primary: "#2563eb", dark: "#1d4ed8", light: "#dbeafe", accent: "#60a5fa", shadow: "rgba(37, 99, 235, 0.32)" },
+    navy: { primary: "#1e3a8a", dark: "#172554", light: "#dbeafe", accent: "#3b82f6", shadow: "rgba(30, 58, 138, 0.32)" },
+    green: { primary: "#16a34a", dark: "#15803d", light: "#dcfce7", accent: "#4ade80", shadow: "rgba(22, 163, 74, 0.32)" },
+    mint: { primary: "#059669", dark: "#047857", light: "#d1fae5", accent: "#34d399", shadow: "rgba(5, 150, 105, 0.32)" },
+    violet: { primary: "#7c3aed", dark: "#6d28d9", light: "#ede9fe", accent: "#a78bfa", shadow: "rgba(124, 58, 237, 0.32)" },
+    orange: { primary: "#ea580c", dark: "#c2410c", light: "#ffedd5", accent: "#fb923c", shadow: "rgba(234, 88, 12, 0.32)" },
+    pink: { primary: "#db2777", dark: "#be185d", light: "#fce7f3", accent: "#f472b6", shadow: "rgba(219, 39, 119, 0.32)" },
+    rose: { primary: "#e11d48", dark: "#be123c", light: "#ffe4e6", accent: "#fb7185", shadow: "rgba(225, 29, 72, 0.32)" },
+    amber: { primary: "#d97706", dark: "#b45309", light: "#fef3c7", accent: "#fbbf24", shadow: "rgba(217, 119, 6, 0.32)" },
+  };
+
+  function setDashboardTheme(themeName) {
+    const theme = DASHBOARD_THEMES[themeName];
+    const root = document.documentElement;
+
+    root.style.setProperty("--primary", theme.primary);
+    root.style.setProperty("--primary-dark", theme.dark);
+    root.style.setProperty("--primary-light", theme.light);
+    root.style.setProperty("--primary-shadow", theme.shadow);
+    root.style.setProperty("--accent", theme.accent);
+    root.style.setProperty("--sidebar-active", theme.primary);
+  }
+
+  function applyDashboardTheme(session) {
+    if (!session || (session.role !== "user" && session.role !== "admin")) return;
+    const storageKey = session.role === "admin" ? "et_theme_admin" : "et_theme_" + session.userId;
+    const savedTheme = localStorage.getItem(storageKey);
+    const themeName = Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, savedTheme) ? savedTheme : "teal";
+    setDashboardTheme(themeName);
+
+    const picker = $("dashboard-theme");
+    if (picker) {
+      picker.value = themeName;
+      picker.addEventListener("change", () => {
+        if (!Object.prototype.hasOwnProperty.call(DASHBOARD_THEMES, picker.value)) return;
+        localStorage.setItem(storageKey, picker.value);
+        setDashboardTheme(picker.value);
+      });
+    }
+  }
+
   function initShell(session) {
     const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
     const title = PAGE_TITLES[page] || "Expense Tracker";
     const h = $("page-title");
     if (h) h.textContent = title;
+    applyDashboardTheme(session);
 
     // sidebar user block
     const avatar = $("sb-avatar");
