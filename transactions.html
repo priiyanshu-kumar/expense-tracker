@@ -6,6 +6,7 @@
     <title>Transactions - Expense Tracker</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="dashboard-shell">
@@ -13,7 +14,7 @@
         <aside class="dash-sidebar">
             <div>
                 <div class="sidebar-brand">
-                    <span class="logo-badge">💰</span>
+                    <span class="logo-badge"><i data-lucide="wallet"></i></span>
                     <div>
                         <div class="brand-name">Expense Tracker</div>
                         <div class="brand-sub">User Module</div>
@@ -21,13 +22,13 @@
                 </div>
                 <nav class="sidebar-nav">
                     <div class="nav-title">Menu</div>
-                    <a href="user-dashboard.html"><span class="icon">📊</span> Dashboard</a>
-                    <a href="transactions.html"><span class="icon">💸</span> Transactions</a>
-                    <a href="budget.html"><span class="icon">🎯</span> Budgets</a>
-                    <a href="accounts.html"><span class="icon">🏦</span> Accounts</a>
-                    <a href="reports.html"><span class="icon">📈</span> Reports</a>
+                    <a href="user-dashboard.html"><span class="icon"><i data-lucide="layout-dashboard"></i></span> Dashboard</a>
+                    <a href="transactions.html"><span class="icon"><i data-lucide="arrow-left-right"></i></span> Transactions</a>
+                    <a href="budget.html"><span class="icon"><i data-lucide="target"></i></span> Budgets</a>
+                    <a href="accounts.html"><span class="icon"><i data-lucide="wallet"></i></span> Accounts</a>
+                    <a href="reports.html"><span class="icon"><i data-lucide="chart-no-axes-combined"></i></span> Reports</a>
                     <div class="nav-title">General</div>
-                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                    <a href="#" data-logout><span class="icon"><i data-lucide="log-out"></i></span> Logout</a>
                 </nav>
             </div>
             <div class="sidebar-user">
@@ -36,7 +37,7 @@
                     <div class="uname" id="sb-name">—</div>
                     <div class="uemail" id="sb-email">—</div>
                 </div>
-                <a href="#" data-logout title="Logout">🚪</a>
+                <a href="#" data-logout title="Logout"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
 
@@ -53,8 +54,8 @@
             <div class="topbar">
                 <h1 id="page-title">Transactions</h1>
                 <div class="topbar-actions">
-                    <button class="btn btn-secondary btn-sm" id="btn-export">⬇ Export CSV</button>
-                    <a href="user-dashboard.html" class="btn btn-outline btn-sm">← Dashboard</a>
+                    <button class="btn btn-secondary btn-sm" id="btn-export"><i data-lucide="download"></i> Export CSV</button>
+                    <a href="user-dashboard.html" class="btn btn-outline btn-sm"><i data-lucide="arrow-left"></i> Dashboard</a>
                 </div>
             </div>
 
@@ -67,13 +68,13 @@
                     <div class="s-box"><div class="s-label">Records</div><div class="s-value" id="sum-count">0</div></div>
                 </section>
 
-                <div id="tx-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+                <div id="tx-alert" class="alert hidden mb-2"><span class="icon"><i data-lucide="info"></i></span><span></span></div>
 
                 <!-- Tabs -->
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="expense">💸 Expenses</button>
-                    <button class="tab-btn" data-tab="income">⬆ Income</button>
-                    <button class="tab-btn" data-tab="recurring">🔁 Recurring</button>
+                    <button class="tab-btn active" data-tab="expense"><i data-lucide="receipt"></i> Expenses</button>
+                    <button class="tab-btn" data-tab="income"><i data-lucide="trending-up"></i> Income</button>
+                    <button class="tab-btn" data-tab="recurring"><i data-lucide="repeat"></i> Recurring</button>
                 </div>
 
                 <!-- Shared filters - one instance, applies to both tables -->
@@ -114,7 +115,7 @@
                                     <label>Description</label>
                                     <textarea id="exp-description" rows="2" placeholder="e.g. Weekly groceries"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">+ Add Expense</button>
+                                <button type="submit" class="btn btn-primary btn-block"><i data-lucide="plus"></i> Add Expense</button>
                             </form>
                         </div>
 
@@ -162,7 +163,7 @@
                                     <label>Description</label>
                                     <textarea id="inc-description" rows="2" placeholder="e.g. Monthly salary"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-block">+ Add Income</button>
+                                <button type="submit" class="btn btn-success btn-block"><i data-lucide="plus"></i> Add Income</button>
                             </form>
                         </div>
 
@@ -189,7 +190,7 @@
                     <div class="section-grid" style="grid-template-columns: 320px 1fr">
                         <div class="panel">
                             <div class="panel-head"><h3>Add Recurring Expense</h3></div>
-                            <div id="rec-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+                            <div id="rec-alert" class="alert hidden mb-2"><span class="icon"><i data-lucide="info"></i></span><span></span></div>
                             <form id="add-recurring-form" class="form-grid">
                                 <div class="field-group">
                                     <label>Name *</label>
@@ -220,7 +221,7 @@
                                     <label>Next Due Date *</label>
                                     <input type="date" id="rec-nextdate">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">+ Add Recurring</button>
+                                <button type="submit" class="btn btn-primary btn-block"><i data-lucide="plus"></i> Add Recurring</button>
                             </form>
                         </div>
                         <div class="panel">
@@ -238,7 +239,7 @@
         <div class="modal">
             <div class="modal-head">
                 <h3 id="edit-title">Edit Transaction</h3>
-                <button class="close-btn" id="edit-modal-close" type="button">✕</button>
+                <button class="close-btn" id="edit-modal-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
             </div>
             <form id="edit-form" class="form-grid">
                 <div class="field-group">
@@ -281,5 +282,6 @@
             });
         });
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

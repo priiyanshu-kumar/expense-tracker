@@ -6,6 +6,7 @@
     <title>Admin Dashboard - Expense Tracker</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="dashboard-shell">
@@ -13,7 +14,7 @@
         <aside class="dash-sidebar">
             <div>
                 <div class="sidebar-brand">
-                    <span class="logo-badge">🛡️</span>
+                    <span class="logo-badge"><i data-lucide="shield-check"></i></span>
                     <div>
                         <div class="brand-name">Expense Tracker</div>
                         <div class="brand-sub">Admin Module</div>
@@ -21,12 +22,12 @@
                 </div>
                 <nav class="sidebar-nav">
                     <div class="nav-title">Admin Menu</div>
-                    <a href="admin-dashboard.html"><span class="icon">📊</span> Overview</a>
-                    <a href="admin-dashboard.html#users"><span class="icon">👥</span> Users</a>
-                    <a href="admin-dashboard.html#transactions"><span class="icon">🧾</span> Transactions</a>
-                    <a href="admin-dashboard.html#categories"><span class="icon">🏷️</span> Categories</a>
+                    <a href="admin-dashboard.html"><span class="icon"><i data-lucide="layout-dashboard"></i></span> Overview</a>
+                    <a href="admin-dashboard.html#users"><span class="icon"><i data-lucide="users-round"></i></span> Users</a>
+                    <a href="admin-dashboard.html#transactions"><span class="icon"><i data-lucide="receipt"></i></span> Transactions</a>
+                    <a href="admin-dashboard.html#categories"><span class="icon"><i data-lucide="tags"></i></span> Categories</a>
                     <div class="nav-title">General</div>
-                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                    <a href="#" data-logout><span class="icon"><i data-lucide="log-out"></i></span> Logout</a>
                 </nav>
             </div>
             <div class="sidebar-user">
@@ -35,7 +36,7 @@
                     <div class="uname" id="sb-name">Administrator</div>
                     <div class="uemail" id="sb-email">admin</div>
                 </div>
-                <a href="#" data-logout title="Logout">🚪</a>
+                <a href="#" data-logout title="Logout"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
 
@@ -62,35 +63,35 @@
                 <!-- Stats - CSS Grid -->
                 <section class="cards-grid">
                     <div class="stat-card">
-                        <span class="stat-icon bg-blue">👥</span>
+                        <span class="stat-icon bg-blue"><i data-lucide="users-round"></i></span>
                         <div>
                             <div class="stat-label">Registered Users</div>
                             <div class="stat-value" id="st-users">0</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-icon bg-green">⬆</span>
+                        <span class="stat-icon bg-green"><i data-lucide="trending-up"></i></span>
                         <div>
                             <div class="stat-label">Total Income (all users)</div>
                             <div class="stat-value" id="st-income">$0.00</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-icon bg-red">⬇</span>
+                        <span class="stat-icon bg-red"><i data-lucide="trending-down"></i></span>
                         <div>
                             <div class="stat-label">Total Expense (all users)</div>
                             <div class="stat-value" id="st-expense">$0.00</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-icon bg-teal">⚖️</span>
+                        <span class="stat-icon bg-teal"><i data-lucide="scale"></i></span>
                         <div>
                             <div class="stat-label">Net Balance</div>
                             <div class="stat-value" id="st-balance">$0.00</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-icon bg-amber">🧾</span>
+                        <span class="stat-icon bg-amber"><i data-lucide="receipt"></i></span>
                         <div>
                             <div class="stat-label">Total Transactions</div>
                             <div class="stat-value" id="st-txcount">0</div>
@@ -109,7 +110,7 @@
                 <!-- Users -->
                 <section id="users" class="mb-3">
                     <div class="panel-head" style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
-                        <h3 style="font-size:16px">👥 Registered Users</h3>
+                        <h3 style="font-size:16px"><i data-lucide="users-round"></i> Registered Users</h3>
                         <a href="#top" class="btn btn-sm btn-outline">Back to top</a>
                     </div>
                     <div class="table-wrap">
@@ -129,7 +130,7 @@
                 <!-- All transactions -->
                 <section id="transactions" class="mb-3">
                     <div class="panel-head" style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
-                        <h3 style="font-size:16px">🧾 All Transactions</h3>
+                        <h3 style="font-size:16px"><i data-lucide="receipt"></i> All Transactions</h3>
                         <div style="display:grid;grid-auto-flow:column;gap:10px;align-items:center">
                             <span class="small muted">Scope:</span>
                             <select id="admin-scope" style="padding:8px 11px;border:1.5px solid var(--border);border-radius:8px">
@@ -171,10 +172,10 @@
                                         <option value="income">Income</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">+ Add Category</button>
+                                <button type="submit" class="btn btn-primary btn-block"><i data-lucide="plus"></i> Add Category</button>
                             </form>
                             <div class="alert alert-info" style="font-size:12.5px">
-                                <span class="icon">ℹ</span>
+                                <span class="icon"><i data-lucide="info"></i></span>
                                 <span>Default categories are applied to new signups. Existing users keep their own copies.</span>
                             </div>
                         </div>
@@ -193,7 +194,7 @@
         <div class="modal" style="max-width:620px">
             <div class="modal-head">
                 <h3>User Details</h3>
-                <button class="close-btn" id="view-close" type="button">✕</button>
+                <button class="close-btn" id="view-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
             </div>
             <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
                 <div class="s-box" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px">
@@ -235,5 +236,6 @@
     <script src="js/dashboard.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/admin.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

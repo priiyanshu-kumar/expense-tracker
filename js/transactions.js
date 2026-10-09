@@ -151,9 +151,10 @@ const Transactions = (function () {
     tbody.innerHTML = "";
     if (!list.length) {
       tbody.innerHTML =
-        '<div class="empty-state"><div class="icon">📭</div><div><strong>No ' +
+        '<div class="empty-state"><div class="icon"><i data-lucide="inbox"></i></div><div><strong>No ' +
         type +
         " records found</strong><br><span class='small'>Add one using the form, or adjust the filters.</span></div></div>";
+      UI.createIcons(tbody);
       return;
     }
 
@@ -220,12 +221,14 @@ const Transactions = (function () {
     const errBox = $("tx-alert");
     if (!validateAmount(amount)) {
       errBox.className = "alert alert-error";
-      errBox.innerHTML = "<div class='icon'>✕</div><div>Enter a valid amount greater than 0.</div>";
+      errBox.innerHTML = "<div class='icon'><i data-lucide='circle-x'></i></div><div>Enter a valid amount greater than 0.</div>";
+      UI.createIcons(errBox);
       return;
     }
     if (!date) {
       errBox.className = "alert alert-error";
-      errBox.innerHTML = "<div class='icon'>✕</div><div>Please select a date.</div>";
+      errBox.innerHTML = "<div class='icon'><i data-lucide='circle-x'></i></div><div>Please select a date.</div>";
+      UI.createIcons(errBox);
       return;
     }
 
@@ -234,7 +237,8 @@ const Transactions = (function () {
     Storage.saveData(Storage.getSession().userId, data);
 
     errBox.className = "alert alert-success";
-    errBox.innerHTML = "<div class='icon'>✓</div><div>" + type.charAt(0).toUpperCase() + type.slice(1) + " added successfully.</div>";
+    errBox.innerHTML = "<div class='icon'><i data-lucide='circle-check'></i></div><div>" + type.charAt(0).toUpperCase() + type.slice(1) + " added successfully.</div>";
+    UI.createIcons(errBox);
     $("add-" + type + "-form").reset();
     $((type === "expense" ? "exp-date" : "inc-date")).value = Storage.todayISO();
     setTimeout(() => (errBox.className = "alert hidden"), 2500);
@@ -358,13 +362,15 @@ const Transactions = (function () {
     const errBox = $("rec-alert");
     if (!name || !validateAmount(amount) || !nextDate) {
       errBox.className = "alert alert-error";
-      errBox.innerHTML = "<div class='icon'>✕</div><div>Fill name, amount and next date.</div>";
+      errBox.innerHTML = "<div class='icon'><i data-lucide='circle-x'></i></div><div>Fill name, amount and next date.</div>";
+      UI.createIcons(errBox);
       return;
     }
     data.recurring.push({ id: Storage.uid(), name, amount: Number(amount), categoryId: catId, accountId: accId, frequency: freq, nextDate, active: true });
     Storage.saveData(Storage.getSession().userId, data);
     errBox.className = "alert alert-success";
-    errBox.innerHTML = "<div class='icon'>✓</div><div>Recurring expense added.</div>";
+    errBox.innerHTML = "<div class='icon'><i data-lucide='circle-check'></i></div><div>Recurring expense added.</div>";
+    UI.createIcons(errBox);
     form.reset();
     $("rec-nextdate").value = Storage.todayISO();
     setTimeout(() => (errBox.className = "alert hidden"), 2500);
@@ -394,7 +400,8 @@ const Transactions = (function () {
     if (!container) return;
     container.innerHTML = "";
     if (!data.recurring.length) {
-      container.innerHTML = "<div class='empty-state'><div class='icon'>🔁</div><div><strong>No recurring expenses</strong><br><span class='small'>Add one on the left to get reminders.</span></div></div>";
+      container.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='repeat'></i></div><div><strong>No recurring expenses</strong><br><span class='small'>Add one on the left to get reminders.</span></div></div>";
+      UI.createIcons(container);
       return;
     }
     data.recurring.forEach((rec) => {
@@ -405,7 +412,7 @@ const Transactions = (function () {
       const card = document.createElement("div");
       card.className = "reminder-item " + cls;
       card.innerHTML =
-        "<div style='font-size:20px'>🔁</div>" +
+        "<div class='reminder-icon'><i data-lucide='repeat'></i></div>" +
         "<div><div class='r-name'>" +
         esc(rec.name) +
         "</div><div class='r-meta'>" +
@@ -426,6 +433,7 @@ const Transactions = (function () {
         rec.id +
         "'>Del</button></span>";
       container.appendChild(card);
+      UI.createIcons(card);
     });
     container.querySelectorAll("[data-post]").forEach((b) => b.addEventListener("click", () => postRecurring(b.dataset.post)));
     container.querySelectorAll("[data-delrec]").forEach((b) => b.addEventListener("click", () => deleteRecurring(b.dataset.delrec)));
@@ -498,7 +506,8 @@ const Transactions = (function () {
     const errBox = $("bud-alert");
     if (!(amount > 0)) {
       errBox.className = "alert alert-error";
-      errBox.innerHTML = "<div class='icon'>✕</div><div>Enter a budget amount greater than 0.</div>";
+      errBox.innerHTML = "<div class='icon'><i data-lucide='circle-x'></i></div><div>Enter a budget amount greater than 0.</div>";
+      UI.createIcons(errBox);
       return;
     }
     const existing = data.budgets.find((b) => b.categoryId === catId && b.month === month);
@@ -509,7 +518,8 @@ const Transactions = (function () {
     }
     Storage.saveData(Storage.getSession().userId, data);
     errBox.className = "alert alert-success";
-    errBox.innerHTML = "<div class='icon'>✓</div><div>Budget saved for <strong>" + UI.categoryName(data.categories, catId) + "</strong> (" + month + ").</div>";
+    errBox.innerHTML = "<div class='icon'><i data-lucide='circle-check'></i></div><div>Budget saved for <strong>" + UI.categoryName(data.categories, catId) + "</strong> (" + month + ").</div>";
+    UI.createIcons(errBox);
     $("add-budget-form").reset();
     setTimeout(() => (errBox.className = "alert hidden"), 2500);
     renderBudgets();
@@ -542,7 +552,8 @@ const Transactions = (function () {
     const tbody = $("budget-table-body");
     tbody.innerHTML = "";
     if (!rows.length) {
-      tbody.innerHTML = "<div class='empty-state'><div class='icon'>🎯</div><div><strong>No budgets set for " + budgetMonth + "</strong><br><span class='small'>Set a budget above to start tracking spending.</span></div></div>";
+      tbody.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='target'></i></div><div><strong>No budgets set for " + budgetMonth + "</strong><br><span class='small'>Set a budget above to start tracking spending.</span></div></div>";
+      UI.createIcons(tbody);
       return;
     }
 
@@ -617,7 +628,8 @@ const Transactions = (function () {
     const grid = $("accounts-grid");
     grid.innerHTML = "";
     if (!data.accounts.length) {
-      grid.innerHTML = "<div class='empty-state'><div class='icon'>🏦</div><div><strong>No accounts yet</strong><br><span class='small'>Add your first account to begin tracking.</span></div></div>";
+      grid.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='landmark'></i></div><div><strong>No accounts yet</strong><br><span class='small'>Add your first account to begin tracking.</span></div></div>";
+      UI.createIcons(grid);
     }
     data.accounts.forEach((a) => {
       const t = accountTotals(data, a.id);
@@ -696,13 +708,15 @@ const Transactions = (function () {
     const errBox = $("acc-alert");
     if (!name) {
       errBox.className = "alert alert-error";
-      errBox.innerHTML = "<div class='icon'>✕</div><div>Please enter an account name.</div>";
+      errBox.innerHTML = "<div class='icon'><i data-lucide='circle-x'></i></div><div>Please enter an account name.</div>";
+      UI.createIcons(errBox);
       return;
     }
     data.accounts.push({ id: Storage.uid(), name, type, balance });
     Storage.saveData(Storage.getSession().userId, data);
     errBox.className = "alert alert-success";
-    errBox.innerHTML = "<div class='icon'>✓</div><div>Account added successfully.</div>";
+    errBox.innerHTML = "<div class='icon'><i data-lucide='circle-check'></i></div><div>Account added successfully.</div>";
+    UI.createIcons(errBox);
     $("add-account-form").reset();
     setTimeout(() => (errBox.className = "alert hidden"), 2500);
     populateSelects();

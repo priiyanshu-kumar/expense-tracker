@@ -6,6 +6,7 @@
     <title>Budgets - Expense Tracker</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="dashboard-shell">
@@ -13,7 +14,7 @@
         <aside class="dash-sidebar">
             <div>
                 <div class="sidebar-brand">
-                    <span class="logo-badge">💰</span>
+                    <span class="logo-badge"><i data-lucide="wallet"></i></span>
                     <div>
                         <div class="brand-name">Expense Tracker</div>
                         <div class="brand-sub">User Module</div>
@@ -21,13 +22,13 @@
                 </div>
                 <nav class="sidebar-nav">
                     <div class="nav-title">Menu</div>
-                    <a href="user-dashboard.html"><span class="icon">📊</span> Dashboard</a>
-                    <a href="transactions.html"><span class="icon">💸</span> Transactions</a>
-                    <a href="budget.html"><span class="icon">🎯</span> Budgets</a>
-                    <a href="accounts.html"><span class="icon">🏦</span> Accounts</a>
-                    <a href="reports.html"><span class="icon">📈</span> Reports</a>
+                    <a href="user-dashboard.html"><span class="icon"><i data-lucide="layout-dashboard"></i></span> Dashboard</a>
+                    <a href="transactions.html"><span class="icon"><i data-lucide="arrow-left-right"></i></span> Transactions</a>
+                    <a href="budget.html"><span class="icon"><i data-lucide="target"></i></span> Budgets</a>
+                    <a href="accounts.html"><span class="icon"><i data-lucide="wallet"></i></span> Accounts</a>
+                    <a href="reports.html"><span class="icon"><i data-lucide="chart-no-axes-combined"></i></span> Reports</a>
                     <div class="nav-title">General</div>
-                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                    <a href="#" data-logout><span class="icon"><i data-lucide="log-out"></i></span> Logout</a>
                 </nav>
             </div>
             <div class="sidebar-user">
@@ -36,7 +37,7 @@
                     <div class="uname" id="sb-name">—</div>
                     <div class="uemail" id="sb-email">—</div>
                 </div>
-                <a href="#" data-logout title="Logout">🚪</a>
+                <a href="#" data-logout title="Logout"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
 
@@ -53,8 +54,8 @@
             <div class="topbar">
                 <h1 id="page-title">Budgets</h1>
                 <div class="topbar-actions">
-                    <a href="transactions.html" class="btn btn-outline btn-sm">+ Add Expenses</a>
-                    <a href="user-dashboard.html" class="btn btn-outline btn-sm">← Dashboard</a>
+                    <a href="transactions.html" class="btn btn-outline btn-sm"><i data-lucide="plus"></i> Add Expenses</a>
+                    <a href="user-dashboard.html" class="btn btn-outline btn-sm"><i data-lucide="arrow-left"></i> Dashboard</a>
                 </div>
             </div>
 
@@ -75,7 +76,7 @@
                     <div class="s-box"><div class="s-label">Status</div><div class="s-value" id="bud-count">0 budgets</div></div>
                 </section>
 
-                <div id="bud-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+                <div id="bud-alert" class="alert hidden mb-2"><span class="icon"><i data-lucide="info"></i></span><span></span></div>
 
                 <div class="section-grid" style="grid-template-columns: 300px 1fr">
                     <div class="panel">
@@ -90,7 +91,7 @@
                                 <input type="number" id="bud-amount" min="1" step="1" placeholder="e.g. 500">
                             </div>
                             <div class="alert alert-info" style="font-size:12.5px">
-                                <span class="icon">ℹ</span>
+                                <span class="icon"><i data-lucide="info"></i></span>
                                 <span>Setting the same category again will update its budget for the selected month.</span>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Save Budget</button>
@@ -121,6 +122,7 @@
     <script src="js/dashboard.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/transactions.js"></script>
+    <script>lucide.createIcons();</script>
     <script>
         UI.onReady(function () {
             Transactions.initBudgetPage();

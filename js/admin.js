@@ -88,7 +88,8 @@ const AdminDash = (function () {
     const users = Storage.getUsers();
     tbody.innerHTML = "";
     if (!users.length) {
-      tbody.innerHTML = "<div class='empty-state'><div class='icon'>👤</div><div><strong>No registered users yet</strong><br><span class='small'>Users appear here after they sign up.</span></div></div>";
+      tbody.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='user-round'></i></div><div><strong>No registered users yet</strong><br><span class='small'>Users appear here after they sign up.</span></div></div>";
+      UI.createIcons(tbody);
       return;
     }
     users.forEach((u) => {
@@ -134,7 +135,8 @@ const AdminDash = (function () {
       .slice(0, 8);
     listBox.innerHTML = "";
     if (!all.length) {
-      listBox.innerHTML = "<div class='empty-state'><div class='icon'>🧾</div><div>No transactions for this user.</div></div>";
+      listBox.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='receipt'></i></div><div>No transactions for this user.</div></div>";
+      UI.createIcons(listBox);
     }
     all.forEach((x) => {
       const isExp = x.type === "expense";
@@ -178,7 +180,8 @@ const AdminDash = (function () {
 
     tbody.innerHTML = "";
     if (!rows.length) {
-      tbody.innerHTML = "<div class='empty-state'><div class='icon'>🧾</div><div><strong>No transactions found</strong><br><span class='small'>Transactions from all users appear here.</span></div></div>";
+      tbody.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='receipt'></i></div><div><strong>No transactions found</strong><br><span class='small'>Transactions from all users appear here.</span></div></div>";
+      UI.createIcons(tbody);
       return;
     }
     rows.slice(0, 30).forEach((r) => {
@@ -231,7 +234,8 @@ const AdminDash = (function () {
     const box = $("#cat-list");
     box.innerHTML = "";
     if (!master.expense.length) {
-      box.innerHTML = "<div class='empty-state'><div class='icon'>🏷️</div><div>No categories.</div></div>";
+      box.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='tags'></i></div><div>No categories.</div></div>";
+      UI.createIcons(box);
       return;
     }
     master.expense.forEach((c) => {

@@ -35,11 +35,12 @@ const Auth = (function () {
   function showAlert(boxId, type, message) {
     const box = $(boxId);
     if (!box) return;
-    const icons = { success: "✓", error: "✕", info: "ℹ", warning: "⚠" };
+    const icons = { success: "circle-check", error: "circle-x", info: "info", warning: "triangle-alert" };
     box.innerHTML =
-      '<div class="icon">' + (icons[type] || "ℹ") + '</div><div>' + message + "</div>";
+      '<div class="icon"><i data-lucide="' + (icons[type] || "info") + '"></i></div><div>' + message + "</div>";
     box.className = "alert alert-" + type;
     box.classList.remove("hidden");
+    UI.createIcons(box);
   }
 
   function hideAlert(boxId) {

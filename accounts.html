@@ -6,6 +6,7 @@
     <title>Accounts - Expense Tracker</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="dashboard-shell">
@@ -13,7 +14,7 @@
         <aside class="dash-sidebar">
             <div>
                 <div class="sidebar-brand">
-                    <span class="logo-badge">💰</span>
+                    <span class="logo-badge"><i data-lucide="wallet"></i></span>
                     <div>
                         <div class="brand-name">Expense Tracker</div>
                         <div class="brand-sub">User Module</div>
@@ -21,13 +22,13 @@
                 </div>
                 <nav class="sidebar-nav">
                     <div class="nav-title">Menu</div>
-                    <a href="user-dashboard.html"><span class="icon">📊</span> Dashboard</a>
-                    <a href="transactions.html"><span class="icon">💸</span> Transactions</a>
-                    <a href="budget.html"><span class="icon">🎯</span> Budgets</a>
-                    <a href="accounts.html"><span class="icon">🏦</span> Accounts</a>
-                    <a href="reports.html"><span class="icon">📈</span> Reports</a>
+                    <a href="user-dashboard.html"><span class="icon"><i data-lucide="layout-dashboard"></i></span> Dashboard</a>
+                    <a href="transactions.html"><span class="icon"><i data-lucide="arrow-left-right"></i></span> Transactions</a>
+                    <a href="budget.html"><span class="icon"><i data-lucide="target"></i></span> Budgets</a>
+                    <a href="accounts.html"><span class="icon"><i data-lucide="wallet"></i></span> Accounts</a>
+                    <a href="reports.html"><span class="icon"><i data-lucide="bar-chart-3"></i></span> Reports</a>
                     <div class="nav-title">General</div>
-                    <a href="#" data-logout><span class="icon">🚪</span> Logout</a>
+                    <a href="#" data-logout><span class="icon"><i data-lucide="log-out"></i></span> Logout</a>
                 </nav>
             </div>
             <div class="sidebar-user">
@@ -36,7 +37,7 @@
                     <div class="uname" id="sb-name">—</div>
                     <div class="uemail" id="sb-email">—</div>
                 </div>
-                <a href="#" data-logout title="Logout">🚪</a>
+                <a href="#" data-logout title="Logout"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
 
@@ -53,13 +54,13 @@
             <div class="topbar">
                 <h1 id="page-title">Accounts</h1>
                 <div class="topbar-actions">
-                    <a href="transactions.html" class="btn btn-outline btn-sm">+ Add Transaction</a>
-                    <a href="user-dashboard.html" class="btn btn-outline btn-sm">← Dashboard</a>
+                    <a href="transactions.html" class="btn btn-outline btn-sm"><i data-lucide="plus"></i> Add Transaction</a>
+                    <a href="user-dashboard.html" class="btn btn-outline btn-sm"><i data-lucide="arrow-left"></i> Dashboard</a>
                 </div>
             </div>
 
             <main class="page-content">
-                <div id="acc-alert" class="alert hidden mb-2"><span class="icon">ℹ</span><span></span></div>
+                <div id="acc-alert" class="alert hidden mb-2"><span class="icon"><i data-lucide="info"></i></span><span></span></div>
 
                 <div class="section-grid" style="grid-template-columns: 320px 1fr">
                     <div class="panel">
@@ -83,10 +84,10 @@
                                 <label>Opening Balance ($)</label>
                                 <input type="number" id="acc-balance" min="0" step="0.01" value="0" placeholder="0.00">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">+ Add Account</button>
+                            <button type="submit" class="btn btn-primary btn-block"><i data-lucide="plus"></i> Add Account</button>
                         </form>
                         <div class="alert alert-info" style="font-size:12.5px">
-                            <span class="icon">ℹ</span>
+                            <span class="icon"><i data-lucide="info"></i></span>
                             <span>Account balance = opening balance + income − expenses for that account.</span>
                         </div>
                     </div>
@@ -120,7 +121,7 @@
         <div class="modal">
             <div class="modal-head">
                 <h3>Edit Account</h3>
-                <button class="close-btn" id="acc-modal-close" type="button">✕</button>
+                <button class="close-btn" id="acc-modal-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
             </div>
             <form id="acc-edit-form" class="form-grid">
                 <div class="field-group">
@@ -161,5 +162,6 @@
             });
         });
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

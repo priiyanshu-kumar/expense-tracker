@@ -42,6 +42,51 @@ body {
   min-height: 100vh;
 }
 
+.sidebar-nav .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.icon svg,
+.logo-badge svg,
+.stat-icon svg,
+.f-icon svg,
+.panel-head h3 svg,
+.btn svg,
+.tab-btn svg,
+.sidebar-user > a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.sidebar-nav .icon svg {
+    width: 19px;
+    height: 19px;
+    stroke-width: 2;
+}
+
+.logo-badge svg {
+    width: 22px;
+    height: 22px;
+}
+
+.stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.empty-state .icon svg {
+    width: 34px;
+    height: 34px;
+    stroke-width: 1.75;
+}
+
 a { color: var(--primary); text-decoration: none; }
 a:hover { color: var(--primary-dark); }
 button { font-family: var(--font); cursor: pointer; }
@@ -171,8 +216,9 @@ img { max-width: 100%; }
 }
 .auth-point .icon {
   display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9px;
-  background: var(--primary-light); color: var(--primary); font-size: 17px;
+  background: var(--primary-light); color: var(--primary);
 }
+.auth-point .icon svg { width: 19px; height: 19px; }
 
 .auth-card {
   background: var(--surface);
@@ -223,7 +269,7 @@ img { max-width: 100%; }
 .alert-success { background: var(--success-light); color: #166534; border: 1px solid #bbf7d0; }
 .alert-info { background: var(--info-light); color: #1e40af; border: 1px solid #bfdbfe; }
 .alert-warning { background: var(--warning-light); color: #92400e; border: 1px solid #fde68a; }
-.alert .icon { font-size: 16px; }
+.alert .icon { display: grid; place-items: center; }
 
 .auth-foot {
   text-align: center; font-size: 13.5px; color: var(--muted);
@@ -256,7 +302,7 @@ img { max-width: 100%; }
   position: sticky; top: 0; height: 100vh;
 }
 .sidebar-brand { display: grid; grid-auto-flow: column; justify-content: start; gap: 10px; align-items: center; padding: 0 8px 20px; }
-.sidebar-brand .logo-badge { width: 36px; height: 36px; border-radius: 10px; background: var(--accent); color: #04121c; display: grid; place-items: center; font-size: 17px; }
+.sidebar-brand .logo-badge { width: 36px; height: 36px; border-radius: 10px; background: var(--accent); color: #04121c; display: grid; place-items: center; }
 .sidebar-brand .brand-name { color: #fff; font-weight: 800; font-size: 16px; line-height: 1.1; }
 .sidebar-brand .brand-sub { font-size: 10.5px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -325,7 +371,7 @@ img { max-width: 100%; }
 .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,23,42,0.1); }
 .stat-card .stat-icon {
   width: 52px; height: 52px; border-radius: 14px;
-  display: grid; place-items: center; font-size: 22px;
+  display: grid; place-items: center;
 }
 .stat-card .stat-label { font-size: 12.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
 .stat-card .stat-value { font-size: 22px; font-weight: 800; margin-top: 2px; }
@@ -368,7 +414,7 @@ img { max-width: 100%; }
   display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center;
   background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
 }
-.feature-item .f-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--primary-light); color: var(--primary); display: grid; place-items: center; font-size: 16px; }
+.feature-item .f-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--primary-light); color: var(--primary); display: grid; place-items: center; }
 .feature-item .f-title { font-weight: 700; font-size: 14px; }
 .feature-item .f-desc { font-size: 12.5px; color: var(--muted); }
 
@@ -431,7 +477,7 @@ img { max-width: 100%; }
   display: grid; place-items: center; gap: 8px;
   padding: 40px 20px; text-align: center; color: var(--muted);
 }
-.empty-state .icon { font-size: 38px; opacity: 0.5; }
+.empty-state .icon { display: grid; place-items: center; opacity: 0.5; }
 
 /* pagination / summary strip */
 .tx-summary-strip {
@@ -512,6 +558,8 @@ img { max-width: 100%; }
 .reminder-item .r-name { font-weight: 700; font-size: 14px; }
 .reminder-item .r-meta { font-size: 12.5px; color: var(--muted); }
 .reminder-item .r-days { font-size: 12.5px; font-weight: 700; }
+.reminder-icon { display: grid; place-items: center; color: var(--primary); }
+.reminder-icon svg { width: 20px; height: 20px; }
 .reminder-item.overdue { border-left-color: var(--danger); }
 .reminder-item.today { border-left-color: var(--success); }
 

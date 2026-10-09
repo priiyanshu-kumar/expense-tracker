@@ -33,6 +33,9 @@ const UI = (function () {
     const a = (accounts || []).find((x) => x.id === id);
     return a ? a.name : "Unknown";
   }
+  function createIcons(root) {
+    if (window.lucide) window.lucide.createIcons({ root: root || document });
+  }
 
   /* ---------- totals & summaries ---------- */
   function calcTotals(data) {
@@ -343,6 +346,7 @@ const UI = (function () {
     $$,
     esc,
     fmtMoney,
+    createIcons,
     categoryName,
     accountName,
     calcTotals,
@@ -462,7 +466,8 @@ const Reports = (function () {
     const list = Array.from(months).sort().reverse();
     body.innerHTML = "";
     if (!list.length) {
-      body.innerHTML = "<div class='empty-state'><div class='icon'>📊</div><div>No data yet to report on.</div></div>";
+      body.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='chart-no-axes-column-increasing'></i></div><div>No data yet to report on.</div></div>";
+      UI.createIcons(body);
       return;
     }
     list.forEach((m) => {

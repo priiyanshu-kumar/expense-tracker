@@ -6,11 +6,12 @@
     <title>User Login - Expense Tracker</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="auth-page">
         <header class="auth-bar">
-            <a class="logo" href="index.html"><span class="logo-badge">💰</span> Expense Tracker</a>
+            <a class="logo" href="index.html"><span class="logo-badge"><i data-lucide="wallet"></i></span> Expense Tracker</a>
             <nav class="site-nav">
                 <a href="index.html">Home</a>
                 <a href="signup.html">Signup</a>
@@ -23,8 +24,8 @@
                 <h1>Welcome <span>back!</span></h1>
                 <p>Sign in to your dashboard to view your transactions, budgets, accounts and reports.</p>
                 <div class="auth-points">
-                    <div class="auth-point"><span class="icon">📊</span><span><strong>Your dashboard</strong><br><span class="small muted">All your financial data in one place</span></span></div>
-                    <div class="auth-point"><span class="icon">🔒</span><span><strong>Secure session</strong><br><span class="small muted">Your login session is saved locally</span></span></div>
+                    <div class="auth-point"><span class="icon"><i data-lucide="layout-dashboard"></i></span><span><strong>Your dashboard</strong><br><span class="small muted">All your financial data in one place</span></span></div>
+                    <div class="auth-point"><span class="icon"><i data-lucide="lock-keyhole"></i></span><span><strong>Secure session</strong><br><span class="small muted">Your login session is saved locally</span></span></div>
                 </div>
             </div>
 
@@ -35,7 +36,7 @@
                 </div>
 
                 <div id="alert-box" class="alert hidden">
-                    <span class="icon">ℹ</span><span></span>
+                    <span class="icon"><i data-lucide="info"></i></span><span></span>
                 </div>
 
                 <form id="login-form" class="form-grid" novalidate>
@@ -75,5 +76,6 @@
             });
         });
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

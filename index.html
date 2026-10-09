@@ -6,12 +6,13 @@
     <title>Expense Tracker - Smart Personal Finance</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="site-grid">
         <header class="site-header">
             <div class="logo">
-                <span class="logo-badge">💰</span>
+                <span class="logo-badge"><i data-lucide="wallet"></i></span>
                 <span>Expense Tracker</span>
             </div>
             <nav class="site-nav">
@@ -28,10 +29,10 @@
                     <h1>Take control of your <span>money</span>, one expense at a time.</h1>
                     <p>A complete expense tracker to categorize spending, set budgets, track multiple accounts and understand your finances through charts and reports.</p>
                     <div class="auth-points" style="grid-template-columns:1fr 1fr">
-                        <div class="auth-point"><span class="icon">🧾</span><span><strong>Track</strong><br><span class="small muted">Expenses &amp; income</span></span></div>
-                        <div class="auth-point"><span class="icon">🎯</span><span><strong>Budget</strong><br><span class="small muted">Per category &amp; month</span></span></div>
-                        <div class="auth-point"><span class="icon">🏦</span><span><strong>Accounts</strong><br><span class="small muted">Multi-account tracking</span></span></div>
-                        <div class="auth-point"><span class="icon">📈</span><span><strong>Reports</strong><br><span class="small muted">Charts &amp; export</span></span></div>
+                        <div class="auth-point"><span class="icon"><i data-lucide="receipt"></i></span><span><strong>Track</strong><br><span class="small muted">Expenses &amp; income</span></span></div>
+                        <div class="auth-point"><span class="icon"><i data-lucide="target"></i></span><span><strong>Budget</strong><br><span class="small muted">Per category &amp; month</span></span></div>
+                        <div class="auth-point"><span class="icon"><i data-lucide="landmark"></i></span><span><strong>Accounts</strong><br><span class="small muted">Multi-account tracking</span></span></div>
+                        <div class="auth-point"><span class="icon"><i data-lucide="chart-no-axes-combined"></i></span><span><strong>Reports</strong><br><span class="small muted">Charts &amp; export</span></span></div>
                     </div>
                     <div style="display:grid;grid-auto-flow:column;justify-content:start;gap:12px;margin-top:24px">
                         <a href="signup.html" class="btn btn-primary">Create Account</a>
@@ -41,23 +42,23 @@
 
                 <div class="auth-card" style="align-content:start">
                     <div class="card-head">
-                        <h2>Welcome 👋</h2>
+                        <h2>Welcome</h2>
                         <p>A complete finance management system with two modules:</p>
                     </div>
                     <div class="feature-list">
                         <a class="feature-item" href="login.html">
-                            <span class="f-icon">👤</span>
+                            <span class="f-icon"><i data-lucide="user-round"></i></span>
                             <span><span class="f-title">User Module</span><br><span class="f-desc">Expenses, incomes, budgets, accounts, recurring reminders, reports</span></span>
-                            <span>→</span>
+                            <span><i data-lucide="arrow-right"></i></span>
                         </a>
                         <a class="feature-item" href="admin-login.html">
-                            <span class="f-icon">🛡️</span>
+                            <span class="f-icon"><i data-lucide="shield-check"></i></span>
                             <span><span class="f-title">Admin Module</span><br><span class="f-desc">Manage users, monitor transactions, view overall statistics</span></span>
-                            <span>→</span>
+                            <span><i data-lucide="arrow-right"></i></span>
                         </a>
                     </div>
                     <div class="alert alert-info">
-                        <span class="icon">ℹ</span>
+                        <span class="icon"><i data-lucide="info"></i></span>
                         <span>Sign up as a new user to get your own private dashboard. All data is stored securely in your browser's Local Storage.</span>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -86,5 +87,6 @@
             }
         })();
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

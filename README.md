@@ -1,6 +1,6 @@
 # 💰 Expense Tracker
 
-A complete **Frontend SDC (Software Development Capstone) project** — a fully functional expense tracking system built with **only HTML, CSS and Vanilla JavaScript**, using **Local Storage** for all data persistence. No frameworks, no databases, no build tools, no backend.
+A complete **Frontend SDC (Software Development Capstone) project** — a fully functional expense tracking system built with **HTML, CSS and Vanilla JavaScript**, using **Local Storage** for all data persistence. The interface uses Lucide icons loaded from its CDN; no application framework, database, build tools, or backend are required.
 
 ---
 
@@ -46,8 +46,9 @@ Build a working, client-side only Expense Tracker that lets users record and man
 | **CSS3**    | Complete UI styled with **CSS Grid** (layouts, dashboards, cards, tables, charts) |
 | **Vanilla JavaScript** | All logic: auth, CRUD, calculations, charts, navigation, export |
 | **Local Storage** | All persistent data: users, admin credentials, session, expenses, income, budgets, accounts, categories, recurring expenses |
+| **Lucide** | Consistent interface icons, loaded from CDN |
 
-> ❌ No React, Bootstrap, Tailwind, Node.js, PHP, Python, Firebase, databases, or any external framework/library.
+> ❌ No React, Bootstrap, Tailwind, Node.js, PHP, Python, Firebase, databases, or application framework.
 
 ## ✨ Features
 

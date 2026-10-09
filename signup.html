@@ -6,11 +6,12 @@
     <title>Sign Up - Expense Tracker</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="auth-page">
         <header class="auth-bar">
-            <a class="logo" href="index.html"><span class="logo-badge">💰</span> Expense Tracker</a>
+            <a class="logo" href="index.html"><span class="logo-badge"><i data-lucide="wallet"></i></span> Expense Tracker</a>
             <nav class="site-nav">
                 <a href="index.html">Home</a>
                 <a href="login.html">Login</a>
@@ -23,8 +24,8 @@
                 <h1>Create your free <span>account</span></h1>
                 <p>Start tracking expenses, setting budgets and building healthy financial habits today. Your data lives privately in your own browser.</p>
                 <div class="auth-points">
-                    <div class="auth-point"><span class="icon">🔐</span><span><strong>Private by design</strong><br><span class="small muted">Everything stays in Local Storage on your device</span></span></div>
-                    <div class="auth-point"><span class="icon">⚡</span><span><strong>Instant setup</strong><br><span class="small muted">No installation, no server — just open the browser</span></span></div>
+                    <div class="auth-point"><span class="icon"><i data-lucide="shield-check"></i></span><span><strong>Private by design</strong><br><span class="small muted">Everything stays in Local Storage on your device</span></span></div>
+                    <div class="auth-point"><span class="icon"><i data-lucide="zap"></i></span><span><strong>Instant setup</strong><br><span class="small muted">No installation, no server — just open the browser</span></span></div>
                 </div>
             </div>
 
@@ -35,7 +36,7 @@
                 </div>
 
                 <div id="alert-box" class="alert hidden">
-                    <span class="icon">ℹ</span><span></span>
+                    <span class="icon"><i data-lucide="info"></i></span><span></span>
                 </div>
 
                 <form id="signup-form" class="form-grid" novalidate>
@@ -93,5 +94,6 @@
             });
         });
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

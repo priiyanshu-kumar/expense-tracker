@@ -21,7 +21,7 @@ const UserDash = (function () {
 
     // greeting
     const greet = $("#greeting");
-    if (greet) greet.textContent = "Welcome back, " + user.name.split(" ")[0] + " 👋";
+    if (greet) greet.textContent = "Welcome back, " + user.name.split(" ")[0];
 
     renderSummaries(data);
     renderCharts(data);
@@ -113,7 +113,8 @@ const UserDash = (function () {
 
     box.innerHTML = "";
     if (!all.length) {
-      box.innerHTML = "<div class='empty-state'><div class='icon'>🧾</div><div><strong>No transactions yet</strong><br><span class='small'>Add your first expense or income.</span></div></div>";
+      box.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='receipt'></i></div><div><strong>No transactions yet</strong><br><span class='small'>Add your first expense or income.</span></div></div>";
+      UI.createIcons(box);
       return;
     }
     all.forEach((t) => {
@@ -137,7 +138,8 @@ const UserDash = (function () {
     const budgets = data.budgets.filter((b) => b.month === month);
     box.innerHTML = "";
     if (!budgets.length) {
-      box.innerHTML = "<div class='empty-state'><div class='icon'>🎯</div><div><strong>No budgets for this month</strong><br><span class='small'><a href='budget.html'>Set budgets</a> to see status here.</span></div></div>";
+      box.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='target'></i></div><div><strong>No budgets for this month</strong><br><span class='small'><a href='budget.html'>Set budgets</a> to see status here.</span></div></div>";
+      UI.createIcons(box);
       return;
     }
     budgets.slice(0, 5).forEach((b) => {
@@ -161,7 +163,8 @@ const UserDash = (function () {
     const reminders = Transactions.upcomingReminders(data, 14);
     box.innerHTML = "";
     if (!reminders.length) {
-      box.innerHTML = "<div class='empty-state'><div class='icon'>🔁</div><div><strong>No upcoming recurring expenses</strong><br><span class='small'>Recurring reminders will appear here.</span></div></div>";
+      box.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='repeat'></i></div><div><strong>No upcoming recurring expenses</strong><br><span class='small'>Recurring reminders will appear here.</span></div></div>";
+      UI.createIcons(box);
       return;
     }
     reminders.forEach((r) => {
@@ -171,10 +174,11 @@ const UserDash = (function () {
       const item = document.createElement("div");
       item.className = "reminder-item " + cls;
       item.innerHTML =
-        "<div style='font-size:18px'>🔁</div>" +
+        "<div class='reminder-icon'><i data-lucide='repeat'></i></div>" +
         "<div><div class='r-name'>" + UI.esc(r.rec.name) + "</div><div class='r-meta'>" + UI.fmtMoney(r.rec.amount) + " • " + UI.esc(Storage.dateFmt(r.next)) + "</div></div>" +
         "<div class='r-days'>" + label + "</div>";
       box.appendChild(item);
+      UI.createIcons(item);
     });
   }
 
@@ -182,7 +186,8 @@ const UserDash = (function () {
     const box = $("#accounts-summary");
     if (!box) return;
     if (!data.accounts.length) {
-      box.innerHTML = "<div class='empty-state'><div class='icon'>🏦</div><div><strong>No accounts</strong><br><span class='small'>Add accounts to track balances separately.</span></div></div>";
+      box.innerHTML = "<div class='empty-state'><div class='icon'><i data-lucide='landmark'></i></div><div><strong>No accounts</strong><br><span class='small'>Add accounts to track balances separately.</span></div></div>";
+      UI.createIcons(box);
       return;
     }
     data.accounts.forEach((a) => {
